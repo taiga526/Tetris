@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 15
-  productGUID: 00000000000000000000000000000000
+  productGUID: 0c35bf2b681947648b5b4cefd984589c
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -696,12 +696,12 @@ PlayerSettings:
     Game_Performance: 0
     Hub: 0
     Purchasing: 0
-    UNet: 0
+    UNet: 1
     Unity_Ads: 0
-  facebookSdkVersion: 
+  facebookSdkVersion: 7.9.4
   apiCompatibilityLevel: 2
   cloudProjectId: 22e249ac-4516-40b3-830d-9ec785260faf
-  projectName: 
+  projectName: Labo_Tetris
   organizationId: taiga-maki
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0

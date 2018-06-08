@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Game : MonoBehaviour {
 
@@ -14,7 +15,19 @@ public class Game : MonoBehaviour {
 	void Start () {
         SpawnNextTetromino();
     }
-	
+
+    bool CheckIsAboveGrid(Tetromino tetromino) {
+        for (int x = 0; x < gridWidth; ++x)
+        {
+            foreach(Transform mino in tetromino.transform) {
+                Vector2 pos = Round(mino.position);
+                if (pos.y > gridHeight - 1) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }	
 
     public bool IsFullRowAt (int y)
     {
@@ -159,6 +172,9 @@ public class Game : MonoBehaviour {
 
         }
         return randomTetrominoName;
+    }
 
+    public void GameOver() {
+        SceneManager.LoadScene("GameOver");
     }
 }

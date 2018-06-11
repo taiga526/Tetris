@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -182,7 +183,7 @@ public class Tetromino : MonoBehaviour {
             if (FindObjectOfType<Game>().CheckIsAboveGrid(this))
             {
 
-                FindObjectOfType<Game>().GameOver();
+              //  FindObjectOfType<Game>().GameOver();
             }
 
             enabled = false;
@@ -344,9 +345,21 @@ public class Tetromino : MonoBehaviour {
             if (horizontalTimer < continuosHorizontalSpeed)
             {
 
+
                 horizontalTimer += Time.deltaTime;
 
                 return;
+
+                transform.position += new Vector3(0, 1, 0);
+                FindObjectOfType<Game>().DeleteRow();
+
+               // if (FindObjectOfType<Game>().CheckIsInsideGrid(this)) {
+                  //  FindObjectOfType<Game>().GameOver();
+                //}
+            
+                enabled = false;
+                FindObjectOfType<Game>().SpawnNextTetromino();
+
             }
         }
 

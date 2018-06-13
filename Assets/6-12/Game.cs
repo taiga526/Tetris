@@ -6,13 +6,13 @@ public class Game : MonoBehaviour {
 
     public float fallSpeed = 1.0f;
 
-<<<<<<< HEAD:Assets/6-12/Game.cs
+
     public static int gridWidth =9;
     public static int gridHeight = 15;
-=======
+
     public static int gridWidth = 5;
     public static int gridHeight = 30;
->>>>>>> da22dd9603b09d4c9446704b25be160651518dec:Assets/Scripts/Game.cs
+
 
     public static Transform[,,] grid = new Transform[gridWidth, gridHeight, gridWidth];
 
@@ -275,19 +275,11 @@ public class Game : MonoBehaviour {
         }
         return randomTetrominoName;
 
-<<<<<<< HEAD:Assets/6-12/Game.cs
     }
 
+
     public void GameOver()
     {
-
-
-=======
-    public void GameOver()
-    {
-
-
->>>>>>> da22dd9603b09d4c9446704b25be160651518dec:Assets/Scripts/Game.cs
       //  Application.LoadLevel("GameOver");
     }
 }

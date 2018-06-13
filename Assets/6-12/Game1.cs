@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Game : MonoBehaviour {
+public class Game1 : MonoBehaviour {
 
 	public static int gridWidth = 10;
 	public static int gridHeight = 20;

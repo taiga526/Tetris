@@ -174,7 +174,7 @@ public class Tetromino : MonoBehaviour {
         else
         {
 
-
+            Destroy(FindObjectOfType<Shadow>().gameObject);
             transform.position += new Vector3(0, 1, 0);
 
             FindObjectOfType<Game>().DeleteRow();

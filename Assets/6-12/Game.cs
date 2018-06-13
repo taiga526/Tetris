@@ -6,8 +6,13 @@ public class Game : MonoBehaviour {
 
     public float fallSpeed = 1.0f;
 
+<<<<<<< HEAD:Assets/6-12/Game.cs
     public static int gridWidth =9;
     public static int gridHeight = 15;
+=======
+    public static int gridWidth = 5;
+    public static int gridHeight = 30;
+>>>>>>> da22dd9603b09d4c9446704b25be160651518dec:Assets/Scripts/Game.cs
 
     public static Transform[,,] grid = new Transform[gridWidth, gridHeight, gridWidth];
 
@@ -18,8 +23,9 @@ public class Game : MonoBehaviour {
     private GameObject previewTetromino;
     private string previewTetrominoName;
 
+
     private Vector3 initTetrominoPosition = new Vector3(2.0f, 15.0f, 2.0f);
-    private Vector3 previewTetrominoPosition = new Vector3(-4.0f, -1.0f, 5.0f);
+    private Vector3 previewTetrominoPosition = new Vector3(-4.0f, 5.0f, 5.0f);
 
     public GameObject liveTetromino;
 
@@ -184,7 +190,46 @@ public class Game : MonoBehaviour {
 
     public void SpawnNextTetromino()
     {
-        GameObject nextTetromino = (GameObject)Instantiate(Resources.Load(GetRandomTetromino(), typeof(GameObject)), initTetrominoPosition, Quaternion.identity);
+        if (!gameStarted)
+        {
+
+            gameStarted = true;
+
+            string nextTetroName = GetRandomTetromino();
+            string nextTetroPath = "Prefab/Model/Tmino_" + nextTetroName;
+            string nextTetroShadowPath = "Prefab/Model/Smino_" + nextTetroName;
+
+            nextTetromino = (GameObject)Instantiate(Resources.Load(nextTetroPath, typeof(GameObject)), initTetrominoPosition, Quaternion.identity);
+            GameObject nextTetroShadow = (GameObject)Instantiate(Resources.Load(nextTetroShadowPath, typeof(GameObject)), initTetrominoPosition, Quaternion.identity);
+
+            //- preview tetromino
+            previewTetrominoName = GetRandomTetromino();
+            string previewTetroPath = "Prefab/Model/Tmino_" + previewTetrominoName;
+
+            previewTetromino = (GameObject)Instantiate(Resources.Load(previewTetroPath, typeof(GameObject)), previewTetrominoPosition, Quaternion.identity);
+            previewTetromino.GetComponent<Tetromino>().enabled = false;
+
+        }
+        else
+        {
+            previewTetromino.transform.localPosition = initTetrominoPosition;
+            nextTetromino = previewTetromino;
+            nextTetromino.GetComponent<Tetromino>().enabled = true;
+
+            string nextTetroShadowPath = "Prefab/Model/Smino_" + previewTetrominoName;
+            GameObject nextTetroShadow = (GameObject)Instantiate(Resources.Load(nextTetroShadowPath, typeof(GameObject)), initTetrominoPosition, Quaternion.identity);
+
+
+            //- preview tetromino
+            previewTetrominoName = GetRandomTetromino();
+            string previewTetroPath = "Prefab/Model/Tmino_" + previewTetrominoName;
+
+            previewTetromino = (GameObject)Instantiate(Resources.Load(previewTetroPath, typeof(GameObject)), previewTetrominoPosition, Quaternion.identity);
+            previewTetromino.GetComponent<Tetromino>().enabled = false;
+
+        }
+
+        liveTetromino = nextTetromino;
     }
 
     public bool CheckIsInsideGrid(Vector3 pos)
@@ -200,21 +245,21 @@ public class Game : MonoBehaviour {
     {
         int randomTetromino = Random.Range(1, 5); ///////////////////FOR SET HOW MUCH TETRIS FORM WE HAVE///////////////////////////
 
-        string randomTetrominoName = "Prefab/Model/Tmino_T";
+        string randomTetrominoName = "";
 
         switch (randomTetromino)
         {
             case 1:
-                randomTetrominoName = "Prefab/Model/Tmino_T";
+                randomTetrominoName = "T";
                 break;
             case 2:
-                randomTetrominoName = "Prefab/Model/Tmino_I";
+                randomTetrominoName = "I";
                 break;
             case 3:
-                randomTetrominoName = "Prefab/Model/Tmino_L";
+                randomTetrominoName = "L";
                 break;
             case 4:
-                randomTetrominoName = "Prefab/Model/Tmino_Square";
+                randomTetrominoName = "Square";
                 break;
            /* case 5:
                 randomTetrominoName = "Prefab/Model/Tmino_J";
@@ -230,12 +275,19 @@ public class Game : MonoBehaviour {
         }
         return randomTetrominoName;
 
+<<<<<<< HEAD:Assets/6-12/Game.cs
     }
 
     public void GameOver()
     {
 
 
+=======
+    public void GameOver()
+    {
+
+
+>>>>>>> da22dd9603b09d4c9446704b25be160651518dec:Assets/Scripts/Game.cs
       //  Application.LoadLevel("GameOver");
     }
 }

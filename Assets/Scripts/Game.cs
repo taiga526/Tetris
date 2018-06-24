@@ -54,14 +54,14 @@ public class Game : MonoBehaviour {
 
     void Update()
     {
-        /*
+        
         UpdateScore();
 
         UpdateUI();
-        */
+        
 
     }
-    /*
+    
     public void UpdateScore()
     {
 
@@ -94,9 +94,14 @@ public class Game : MonoBehaviour {
     public void UpdateUI()
     {
 
-        hud_score.text = currentScore.ToString();
+       /* hud_score.text = currentScore.ToString();*/
     }
-    
+
+    public void UpdateCurrentScore()
+    {
+        PlayerPrefs.SetInt("CurrentScore", currentScore);
+    }
+
     public void UpdateHighScore()
     {
 
@@ -122,7 +127,7 @@ public class Game : MonoBehaviour {
             PlayerPrefs.SetInt("HighScore3", currentScore);
         }
     }
-    */
+    
 
     public void ClearedOneRow()
     {

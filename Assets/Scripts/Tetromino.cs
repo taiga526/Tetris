@@ -236,7 +236,9 @@ public class Tetromino : MonoBehaviour {
 
             Game.currentScore += individualScore;
 
-            //FindObjectOfType<Game>().UpdateHighScore();
+            FindObjectOfType<Game>().UpdateHighScore();
+
+            FindObjectOfType<Game>().UpdateCurrentScore();
 
             FindObjectOfType<Game>().SpawnNextTetromino();
         }

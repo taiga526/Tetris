@@ -1,23 +1,40 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Game : MonoBehaviour {
 
-    public float fallSpeed = 1.0f;
+    float fallSpeed = 1.0f;
+
+    public int currentLevel = 0;
+    private int numOfRowsCleared = 0;
 
     public static int gridWidth = 5;
-    public static int gridHeight = 30;
+    public static int gridHeight = 15;
 
     public static Transform[,,] grid = new Transform[gridWidth, gridHeight, gridWidth];
 
+    public int scoreOneLine = 100;
+    public int scoreTwoLine = 300;
+    public int scoreThreeLine = 500;
+
     private bool gameStarted = false;
     private int numberOfRowsThisTurn = 0;
+
+    public static int currentScore = 0;
+
+    private int startingHighScore;
+    private int startingHighScore2;
+    private int startingHighScore3;
 
     private GameObject nextTetromino;
     private GameObject previewTetromino;
     private string previewTetrominoName;
 
+    public Text hud_score;
+    public Text hud_level;
+    public Text hud_rows;
 
     private Vector3 initTetrominoPosition = new Vector3(2.0f, 15.0f, 2.0f);
     private Vector3 previewTetrominoPosition = new Vector3(-4.0f, 5.0f, 5.0f);
@@ -27,6 +44,108 @@ public class Game : MonoBehaviour {
     // Use this for initialization
     void Start () {
         SpawnNextTetromino();
+
+        currentScore = 0;
+
+        startingHighScore = PlayerPrefs.GetInt("HighScore");
+        startingHighScore2 = PlayerPrefs.GetInt("HighScore2");
+        startingHighScore3 = PlayerPrefs.GetInt("HighScore3");
+    }
+
+    void Update()
+    {
+        /*
+        UpdateScore();
+
+        UpdateUI();
+        */
+
+    }
+    /*
+    public void UpdateScore()
+    {
+
+        if (numberOfRowsThisTurn > 0)
+        {
+
+            if (numberOfRowsThisTurn == 1)
+            {
+
+                ClearedOneRow();
+
+            }
+            else if (numberOfRowsThisTurn == 2)
+            {
+
+                ClearedTwoRows();
+
+            }
+            else if (numberOfRowsThisTurn == 3)
+            {
+
+                ClearedThreeRows();
+
+            }
+
+            numberOfRowsThisTurn = 0;
+
+        }
+    }
+    public void UpdateUI()
+    {
+
+        hud_score.text = currentScore.ToString();
+    }
+    
+    public void UpdateHighScore()
+    {
+
+
+        if (currentScore > startingHighScore)
+        {
+
+            PlayerPrefs.SetInt("HighScore3", startingHighScore2);
+            PlayerPrefs.SetInt("HighScore2", startingHighScore);
+            PlayerPrefs.SetInt("HighScore", currentScore);
+
+        }
+        else if (currentScore > startingHighScore2)
+        {
+
+            PlayerPrefs.SetInt("HighScore3", startingHighScore2);
+            PlayerPrefs.SetInt("HighScore2", currentScore);
+
+        }
+        else if (currentScore > startingHighScore3)
+        {
+
+            PlayerPrefs.SetInt("HighScore3", currentScore);
+        }
+    }
+    */
+
+    public void ClearedOneRow()
+    {
+
+        currentScore += scoreOneLine + (currentLevel * 30);
+
+        numOfRowsCleared++;
+    }
+
+    public void ClearedTwoRows()
+    {
+
+        currentScore += scoreTwoLine + (currentLevel * 40);
+
+        numOfRowsCleared += 2;
+    }
+
+    public void ClearedThreeRows()
+    {
+
+        currentScore += scoreThreeLine + (currentLevel * 50);
+
+        numOfRowsCleared += 3;
     }
 
     public void DeleteRow()
@@ -131,15 +250,19 @@ public class Game : MonoBehaviour {
 
     public bool CheckIsAboveGrid(Tetromino tetromino)
     {
-
-        foreach (Transform mino in tetromino.transform)
+        for (int x = 0; x < gridHeight; ++x)
         {
 
-            Vector3 pos = Round(mino.position);
 
-            if (pos.y > gridHeight - 1)
+            foreach (Transform mino in tetromino.transform)
             {
-                return true;
+
+                Vector3 pos = Round(mino.position);
+
+                if (pos.y > gridHeight - 1)
+                {
+                    return true;
+                }
             }
         }
 
@@ -238,7 +361,7 @@ public class Game : MonoBehaviour {
     }
     string GetRandomTetromino()
     {
-        int randomTetromino = Random.Range(1, 5); ///////////////////FOR SET HOW MUCH TETRIS FORM WE HAVE///////////////////////////
+        int randomTetromino = Random.Range(1, 8); ///////////////////FOR SET HOW MUCH TETRIS FORM WE HAVE///////////////////////////
 
         string randomTetrominoName = "";
 
@@ -256,15 +379,16 @@ public class Game : MonoBehaviour {
             case 4:
                 randomTetrominoName = "Square";
                 break;
-           /* case 5:
-                randomTetrominoName = "Prefab/Model/Tmino_J";
+            case 5:
+                randomTetrominoName = "S";
                 break;
-                 case 6:
-                      randomTetrominoName = "Prefab/Model/Tmino_S";
-                      break;
-                  case 7:
-                      randomTetrominoName = "Prefab/Model/Tmino_Z";
-                      break;*/
+            case 6:
+                randomTetrominoName = "X";
+                break;
+            case 7:
+                randomTetrominoName = "M";
+                break;
+
 
 
         }
@@ -275,6 +399,6 @@ public class Game : MonoBehaviour {
     {
 
 
-      //  Application.LoadLevel("GameOver");
+        Application.LoadLevel("GameOver");
     }
 }

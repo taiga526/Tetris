@@ -23,16 +23,21 @@ public class LeftController : MonoBehaviour {
             {
                 if (touchPosition.y > 0){
                     Debug.Log("Press UP");
-                    gameObject.GetComponent<Tetromino>().KeyUpHorizontal();
-
                     liveTetro = FindObjectOfType<Game>().liveTetromino;
 
                     liveTetro.GetComponent<Tetromino>().RotateY();
-                } else{                    
+                }else{
+                    if (device.GetPressDown(SteamVR_Controller.ButtonMask.Trigger)) {
+                        Debug.Log("Press DOWN && triger down");
+                        liveTetro = FindObjectOfType<Game>().liveTetromino;
+
+                        liveTetro.GetComponent<Tetromino>().SlamDown();
+                    }
                     Debug.Log("Press DOWN");
                     liveTetro = FindObjectOfType<Game>().liveTetromino;
 
                     liveTetro.GetComponent<Tetromino>().KeyUpVertical();
+                    liveTetro.GetComponent<Tetromino>().MoveDown();
                 }
 
             }else{
@@ -40,7 +45,6 @@ public class LeftController : MonoBehaviour {
                 if (touchPosition.x > 0)
                 {                    
                     Debug.Log("Press RIGHT");
-                    gameObject.GetComponent<Tetromino>().KeyUpHorizontal();
 
                     liveTetro = FindObjectOfType<Game>().liveTetromino;
 

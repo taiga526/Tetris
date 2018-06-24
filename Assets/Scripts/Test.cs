@@ -5,7 +5,8 @@ using UnityEngine;
 public class Test : MonoBehaviour {
 
     GameObject liveTetro;
-    //float fall = 0;
+    public float fall = 0;
+    public float fallSpeed = 1;
 
     // Use this for initialization
     void Start () {
@@ -14,39 +15,13 @@ public class Test : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        float fallSpeed = FindObjectOfType<Game>().fallSpeed;
 
-        if (Input.GetKeyUp(KeyCode.V)) {
+        if (Input.GetKeyUp(KeyCode.Backspace) ) {
             liveTetro = FindObjectOfType<Game>().liveTetromino;
 
-            liveTetro.GetComponent<Tetromino>().KeyUpHorizontal();
-            liveTetro.GetComponent<Tetromino>().MoveZPos();
-            Debug.Log("V");
+            liveTetro.GetComponent<Tetromino>().KeyUpVertical();
+            liveTetro.GetComponent<Tetromino>().MoveDown();
+            Debug.Log("Zキーを押した");
         }
-
-        if (Input.GetKeyUp(KeyCode.B)) {
-            liveTetro = FindObjectOfType<Game>().liveTetromino;
-
-            liveTetro.GetComponent<Tetromino>().KeyUpHorizontal();
-            liveTetro.GetComponent<Tetromino>().MoveZNeg();
-            Debug.Log("B");
-        }
-        /*
-        if (Input.GetKeyUp(KeyCode.V)) {
-            liveTetro = FindObjectOfType<Game>().liveTetromino;
-
-            liveTetro.GetComponent<Tetromino>().KeyUpHorizontal();
-            liveTetro.GetComponent<Tetromino>().MoveXNeg();
-            Debug.Log("V");
-        }
-
-        if (Input.GetKeyUp(KeyCode.V)) {
-            liveTetro = FindObjectOfType<Game>().liveTetromino;
-
-            liveTetro.GetComponent<Tetromino>().KeyUpHorizontal();
-            liveTetro.GetComponent<Tetromino>().MoveXNeg();
-            Debug.Log("V");
-        }*/
     }
-    
 }

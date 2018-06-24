@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class Tetromino : MonoBehaviour {
 
-    float fall = 0;
+    public float fall = 0;
     public float fallSpeed = 1;
 
     public bool allowRotation = true ;
     public bool limitRotation = false ;
+
+    public int individualScore = 100;
+
+    private float individualScoreTime;
 
     private float continuosVerticalSpeed = 0.05f;
     private float continuosHorizontalSpeed = 0.1f;
@@ -42,7 +46,29 @@ public class Tetromino : MonoBehaviour {
 	void Update () {
 
         CheckUserInput();
-	}
+
+        UpdateIndividualScore();
+    }
+
+    void UpdateIndividualScore()
+    {
+
+        if (individualScoreTime < 1)
+        {
+
+            individualScoreTime += Time.deltaTime;
+
+        }
+        else
+        {
+
+            individualScoreTime = 0;
+
+            individualScore = Mathf.Max(individualScore - 10, 0);
+        }
+
+
+    }
 
     public void KeyUpHorizontal()
     {
@@ -125,8 +151,29 @@ public class Tetromino : MonoBehaviour {
 
             RotateZ();
         }
+
+        //-Slame
+
+        if(Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            SlamDown();
+        }
     }
 
+    public void SlamDown()
+    {
+        while (CheckIsValidPosition())
+        {
+            transform.position += new Vector3(0, -1, 0);
+        }
+
+        if(!CheckIsValidPosition ())
+        {
+
+            transform.position += new Vector3(0, 1, 0);
+            FindObjectOfType<Game>().UpdateGrid(this);
+        }
+    }
     /// <summary>
 	/// Move and rotate Tetromino at different direction and along different axis
 	/// </summary>
@@ -165,7 +212,7 @@ public class Tetromino : MonoBehaviour {
             if (Input.GetKey(KeyCode.Space))
             {
 
-               
+               //add sound to key.space
             }
 
             FindObjectOfType<Game>().UpdateGrid(this);
@@ -187,6 +234,9 @@ public class Tetromino : MonoBehaviour {
 
             enabled = false;
 
+            Game.currentScore += individualScore;
+
+            //FindObjectOfType<Game>().UpdateHighScore();
 
             FindObjectOfType<Game>().SpawnNextTetromino();
         }

@@ -6,7 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class MenuSystem : MonoBehaviour {
 
-    public string SceneName;
+    public string GameSceneName;
+
+    public string TitleSceneName;
 
     public Text GameOverScore;
     public Text GameOverScore2;
@@ -14,7 +16,11 @@ public class MenuSystem : MonoBehaviour {
     public Text GameOverScore4;
 
     public void PlayAgain() {
-        Application.LoadLevel("Game");
+        SceneManager.LoadScene(GameSceneName);
+    }
+
+    public void toTitle() {
+        SceneManager.LoadScene(TitleSceneName);
     }
 
     private void Start()

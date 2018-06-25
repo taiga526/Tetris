@@ -11,10 +11,9 @@ public class MenuSystem : MonoBehaviour {
     public Text GameOverScore;
     public Text GameOverScore2;
     public Text GameOverScore3;
-    public Text GameOverScore4;
 
     public void PlayAgain() {
-        Application.LoadLevel("Game");
+        SceneManager.LoadScene(SceneName);
     }
 
     private void Start()
@@ -22,7 +21,6 @@ public class MenuSystem : MonoBehaviour {
         GameOverScore.text = PlayerPrefs.GetInt("HighScore").ToString();
         GameOverScore2.text = PlayerPrefs.GetInt("HighScore2").ToString();
         GameOverScore3.text = PlayerPrefs.GetInt("HighScore3").ToString();
-        GameOverScore4.text = PlayerPrefs.GetInt("CurrentScore").ToString();
 
     }
 }

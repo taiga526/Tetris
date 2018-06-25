@@ -47,7 +47,7 @@ public class PositionRecenter : MonoBehaviour {
         yDis = defaultPos.y - eye.transform.position.y;
         xDis = defaultPos.x - eye.transform.position.x;
         zDis = defaultPos.z - eye.transform.position.z;
-       // avatar.transform.position = avatar.transform.position + new Vector3(xDis, yDis, zDis);
+        avatar.transform.position = avatar.transform.position + new Vector3(xDis, yDis, zDis);
 
         //手のポジションを、Avatarと一緒に移動します。
         foreach (GameObject h in hands) {

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.XR;
+
 
 public class Game : MonoBehaviour {
 
@@ -50,6 +52,8 @@ public class Game : MonoBehaviour {
         startingHighScore = PlayerPrefs.GetInt("HighScore");
         startingHighScore2 = PlayerPrefs.GetInt("HighScore2");
         startingHighScore3 = PlayerPrefs.GetInt("HighScore3");
+
+        XRDevice.SetTrackingSpaceType(TrackingSpaceType.RoomScale);
     }
 
     void Update()

@@ -16,6 +16,13 @@ public class LeftController : MonoBehaviour {
         SteamVR_TrackedObject trackedObject = GetComponent<SteamVR_TrackedObject>();
         var device = SteamVR_Controller.Input((int)trackedObject.index);
 
+        if (device.GetPressDown(SteamVR_Controller.ButtonMask.Trigger)) {
+            Debug.Log("Press DOWN && triger down");
+
+            liveTetro = FindObjectOfType<Game>().liveTetromino;
+            liveTetro.GetComponent<Tetromino>().SlamDown();
+        }
+
         if (device.GetPressDown(SteamVR_Controller.ButtonMask.Touchpad))
         {
             Vector2 touchPosition = device.GetAxis();
@@ -27,12 +34,6 @@ public class LeftController : MonoBehaviour {
 
                     liveTetro.GetComponent<Tetromino>().RotateY();
                 }else{
-                    if (device.GetPressDown(SteamVR_Controller.ButtonMask.Trigger)) {
-                        Debug.Log("Press DOWN && triger down");
-                        liveTetro = FindObjectOfType<Game>().liveTetromino;
-
-                        liveTetro.GetComponent<Tetromino>().SlamDown();
-                    }
                     Debug.Log("Press DOWN");
                     liveTetro = FindObjectOfType<Game>().liveTetromino;
 

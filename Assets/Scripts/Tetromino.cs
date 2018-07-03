@@ -134,28 +134,31 @@ public class Tetromino : MonoBehaviour {
         }
 
         //- Rotatoin along three axis
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            RotateXPos();
+        }
+
         if (Input.GetKeyDown(KeyCode.A))
         {
-
-            RotateX();
+            RotateYNeg();
         }
 
         if (Input.GetKeyDown(KeyCode.S))
         {
-
-            RotateY();
+            RotateXNeg();
         }
 
         if (Input.GetKeyDown(KeyCode.D))
         {
-
-            RotateZ();
+            RotateYPos();
         }
 
         //-Slame
 
         if(Input.GetKeyUp(KeyCode.LeftShift))
         {
+
             SlamDown();
         }
     }
@@ -425,18 +428,14 @@ public class Tetromino : MonoBehaviour {
         }
     }
 
-    public void RotateX()
+    public void RotateXPos()
     {
 
         transform.Rotate(90, 0, 0, Space.World);
 
         if (CheckIsValidPosition())
         {
-
-
-
             FindObjectOfType<Game>().UpdateGrid(this);
-
         }
         else
         {
@@ -444,18 +443,14 @@ public class Tetromino : MonoBehaviour {
         }
     }
 
-    public void RotateY()
+    public void RotateYPos()
     {
 
         transform.Rotate(0, 90, 0, Space.World);
 
         if (CheckIsValidPosition())
         {
-
-
-
             FindObjectOfType<Game>().UpdateGrid(this);
-
         }
         else
         {
@@ -463,6 +458,38 @@ public class Tetromino : MonoBehaviour {
         }
     }
 
+    public void RotateXNeg()
+    {
+
+        transform.Rotate(-90, 0, 0, Space.World);
+
+        if (CheckIsValidPosition())
+        {
+            FindObjectOfType<Game>().UpdateGrid(this);
+        }
+        else
+        {
+            transform.Rotate(90, 0, 0, Space.World);
+        }
+    }
+
+    public void RotateYNeg()
+    {
+
+        transform.Rotate(0, -90, 0, Space.World);
+
+        if (CheckIsValidPosition())
+        {
+            FindObjectOfType<Game>().UpdateGrid(this);
+        }
+        else
+        {
+            transform.Rotate(0, 90, 0, Space.World);
+        }
+    }
+
+
+    /*
     public void RotateZ()
     {
 
@@ -470,16 +497,15 @@ public class Tetromino : MonoBehaviour {
 
         if (CheckIsValidPosition())
         {
-
-
             FindObjectOfType<Game>().UpdateGrid(this);
-
         }
         else
         {
             transform.Rotate(0, 0, -90, Space.World);
         }
     }
+    */
+
 
     bool CheckIsValidPosition()
     {

@@ -16,12 +16,24 @@ public class LeftController : MonoBehaviour {
         SteamVR_TrackedObject trackedObject = GetComponent<SteamVR_TrackedObject>();
         var device = SteamVR_Controller.Input((int)trackedObject.index);
 
+        
         if (device.GetPressDown(SteamVR_Controller.ButtonMask.Trigger)) {
-            Debug.Log("Press DOWN && triger down");
+            Debug.Log("triger down");
 
             liveTetro = FindObjectOfType<Game>().liveTetromino;
             liveTetro.GetComponent<Tetromino>().SlamDown();
         }
+
+        if (device.GetPressDown(SteamVR_Controller.ButtonMask.Grip))
+        {
+            Debug.Log("grip down");
+            liveTetro = FindObjectOfType<Game>().liveTetromino;
+
+            liveTetro.GetComponent<Tetromino>().KeyUpVertical();
+            liveTetro.GetComponent<Tetromino>().MoveDown();
+        }
+
+
 
         if (device.GetPressDown(SteamVR_Controller.ButtonMask.Touchpad))
         {
@@ -32,13 +44,15 @@ public class LeftController : MonoBehaviour {
                     Debug.Log("Press UP");
                     liveTetro = FindObjectOfType<Game>().liveTetromino;
 
-                    liveTetro.GetComponent<Tetromino>().RotateY();
-                }else{
+                    liveTetro.GetComponent<Tetromino>().RotateXPos();
+                }
+                else
+                {
                     Debug.Log("Press DOWN");
                     liveTetro = FindObjectOfType<Game>().liveTetromino;
 
-                    liveTetro.GetComponent<Tetromino>().KeyUpVertical();
-                    liveTetro.GetComponent<Tetromino>().MoveDown();
+                    //liveTetro.GetComponent<Tetromino>().KeyUpVertical();
+                    liveTetro.GetComponent<Tetromino>().RotateXNeg();
                 }
 
             }else{
@@ -49,13 +63,15 @@ public class LeftController : MonoBehaviour {
 
                     liveTetro = FindObjectOfType<Game>().liveTetromino;
 
-                    liveTetro.GetComponent<Tetromino>().RotateZ();
-                } else{                    
+                    liveTetro.GetComponent<Tetromino>().RotateYPos();
+                }
+                else
+                {                    
                     Debug.Log("Press LEFT");
 
                     liveTetro = FindObjectOfType<Game>().liveTetromino;
 
-                    liveTetro.GetComponent<Tetromino>().RotateX();
+                    liveTetro.GetComponent<Tetromino>().RotateYNeg();
                 }
             }
         }

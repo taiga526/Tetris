@@ -19,6 +19,23 @@ public class RightController : MonoBehaviour {
 
         Quaternion direction = InputTracking.GetLocalRotation(XRNode.Head);
 
+        if (device.GetPressDown(SteamVR_Controller.ButtonMask.Trigger))
+        {
+            Debug.Log("triger down");
+
+            liveTetro = FindObjectOfType<Game>().liveTetromino;
+            liveTetro.GetComponent<Tetromino>().SlamDown();
+        }
+
+        if (device.GetPressDown(SteamVR_Controller.ButtonMask.Grip))
+        {
+            Debug.Log("grip down");
+            liveTetro = FindObjectOfType<Game>().liveTetromino;
+
+            liveTetro.GetComponent<Tetromino>().KeyUpVertical();
+            liveTetro.GetComponent<Tetromino>().MoveDown();
+        }
+
         // 前向き
         if (-0.25f <= direction[1] && direction[1] < 0.25f) {
 

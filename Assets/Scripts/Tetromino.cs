@@ -36,11 +36,19 @@ public class Tetromino : MonoBehaviour {
 
     bool moved = false;
 
+    public AudioClip LandSFX;
+    public float Volume;
+    AudioSource AudioFX;
+
+
+    public GameObject PTS;
+
     // Use this for initialization
     void Start () {
 
+        AudioFX = GetComponent<AudioSource>();
 
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -244,6 +252,10 @@ public class Tetromino : MonoBehaviour {
             FindObjectOfType<Game>().UpdateCurrentScore();
 
             FindObjectOfType<Game>().SpawnNextTetromino();
+
+            ParticleS();
+
+            SoundFX();
         }
 
         fall = Time.time;
@@ -285,10 +297,12 @@ public class Tetromino : MonoBehaviour {
 
 
             FindObjectOfType<Game>().UpdateGrid(this);
+            SoundFX();
 
         }
         else
         {
+            
             transform.position += new Vector3(-1, 0, 0);
         }
     }
@@ -330,10 +344,12 @@ public class Tetromino : MonoBehaviour {
 
 
             FindObjectOfType<Game>().UpdateGrid(this);
+            SoundFX();
 
         }
         else
         {
+           
             transform.position += new Vector3(1, 0, 0);
         }
     }
@@ -375,10 +391,12 @@ public class Tetromino : MonoBehaviour {
 
 
             FindObjectOfType<Game>().UpdateGrid(this);
+            SoundFX();
 
         }
         else
         {
+            
             transform.position += new Vector3(0, 0, -1);
         }
     }
@@ -420,10 +438,12 @@ public class Tetromino : MonoBehaviour {
 
 
             FindObjectOfType<Game>().UpdateGrid(this);
+            SoundFX();
 
         }
         else
         {
+            
             transform.position += new Vector3(0, 0, 1);
         }
     }
@@ -436,6 +456,7 @@ public class Tetromino : MonoBehaviour {
         if (CheckIsValidPosition())
         {
             FindObjectOfType<Game>().UpdateGrid(this);
+            SoundFX();
         }
         else
         {
@@ -451,6 +472,7 @@ public class Tetromino : MonoBehaviour {
         if (CheckIsValidPosition())
         {
             FindObjectOfType<Game>().UpdateGrid(this);
+            SoundFX();
         }
         else
         {
@@ -466,6 +488,7 @@ public class Tetromino : MonoBehaviour {
         if (CheckIsValidPosition())
         {
             FindObjectOfType<Game>().UpdateGrid(this);
+            SoundFX();
         }
         else
         {
@@ -481,6 +504,7 @@ public class Tetromino : MonoBehaviour {
         if (CheckIsValidPosition())
         {
             FindObjectOfType<Game>().UpdateGrid(this);
+            SoundFX();
         }
         else
         {
@@ -522,5 +546,17 @@ public class Tetromino : MonoBehaviour {
             }
         }
         return true;
+    }
+
+    void SoundFX()
+    {
+        AudioFX.PlayOneShot(LandSFX, Volume);
+    }
+
+    void ParticleS()
+    {
+        var cloneFX = Instantiate(PTS,transform.position,PTS.transform.rotation);
+        Destroy(cloneFX, 2.0f);
+
     }
 }

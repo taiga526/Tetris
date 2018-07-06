@@ -43,6 +43,15 @@ public class Game : MonoBehaviour {
 
     public GameObject liveTetromino;
 
+    public ParticleSystem DeleteFX;
+
+
+    public AudioClip DeleteSFX;
+    public float Volume;
+    AudioSource AudioFX;
+
+
+
     // Use this for initialization
     void Start () {
         SpawnNextTetromino();
@@ -54,6 +63,10 @@ public class Game : MonoBehaviour {
         startingHighScore3 = PlayerPrefs.GetInt("HighScore3");
 
         XRDevice.SetTrackingSpaceType(TrackingSpaceType.RoomScale);
+
+        AudioFX = GetComponent<AudioSource>();
+
+
     }
 
     void Update()
@@ -62,10 +75,14 @@ public class Game : MonoBehaviour {
         UpdateScore();
 
         UpdateUI();
-        
+
+
+
 
     }
-    
+
+
+
     public void UpdateScore()
     {
 
@@ -139,6 +156,9 @@ public class Game : MonoBehaviour {
         currentScore += scoreOneLine + (currentLevel * 30);
 
         numOfRowsCleared++;
+        DeleteFX.Play();
+        AudioFX.PlayOneShot(DeleteSFX, Volume);
+
     }
 
     public void ClearedTwoRows()
@@ -147,6 +167,8 @@ public class Game : MonoBehaviour {
         currentScore += scoreTwoLine + (currentLevel * 40);
 
         numOfRowsCleared += 2;
+        DeleteFX.Play();
+        AudioFX.PlayOneShot(DeleteSFX, Volume);
     }
 
     public void ClearedThreeRows()
@@ -155,6 +177,8 @@ public class Game : MonoBehaviour {
         currentScore += scoreThreeLine + (currentLevel * 50);
 
         numOfRowsCleared += 3;
+        DeleteFX.Play();
+        AudioFX.PlayOneShot(DeleteSFX, Volume);
     }
 
     public void DeleteRow()

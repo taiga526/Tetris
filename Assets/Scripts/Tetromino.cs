@@ -513,8 +513,8 @@ public class Tetromino : MonoBehaviour {
     }
 
 
-    /*
-    public void RotateZ()
+    
+    public void RotateZPos()
     {
 
         transform.Rotate(0, 0, 90, Space.World);
@@ -528,7 +528,22 @@ public class Tetromino : MonoBehaviour {
             transform.Rotate(0, 0, -90, Space.World);
         }
     }
-    */
+
+    public void RotateZNeg()
+    {
+
+        transform.Rotate(0, 0, -90, Space.World);
+
+        if (CheckIsValidPosition())
+        {
+            FindObjectOfType<Game>().UpdateGrid(this);
+        }
+        else
+        {
+            transform.Rotate(0, 0, -90, Space.World);
+        }
+    }
+
 
 
     bool CheckIsValidPosition()

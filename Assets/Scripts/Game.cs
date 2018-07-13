@@ -394,7 +394,7 @@ public class Game : MonoBehaviour {
     }
     string GetRandomTetromino()
     {
-        int randomTetromino = Random.Range(1,8); ///////////////////FOR SET HOW MUCH TETRIS FORM WE HAVE///////////////////////////
+        int randomTetromino = Random.Range(1, 6); ///////////////////FOR SET HOW MUCH TETRIS FORM WE HAVE///////////////////////////
 
         string randomTetrominoName = "";
 
@@ -415,13 +415,14 @@ public class Game : MonoBehaviour {
             case 5:
                 randomTetrominoName = "S";
                 break;
+                /*
             case 6:
-                randomTetrominoName = "S2";
+                randomTetrominoName = "X";
                 break;
             case 7:
-                randomTetrominoName = "L2";
+                randomTetrominoName = "M";
                 break;
-              
+                */
 
         }
         return randomTetrominoName;

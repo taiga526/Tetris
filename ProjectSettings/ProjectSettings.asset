@@ -702,7 +702,7 @@ PlayerSettings:
   facebookSdkVersion: 7.9.4
   apiCompatibilityLevel: 2
   cloudProjectId: 22e249ac-4516-40b3-830d-9ec785260faf
-  projectName: 
+  projectName: Labo_Tetris
   organizationId: taiga-maki
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
